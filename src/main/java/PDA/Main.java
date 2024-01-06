@@ -1,7 +1,4 @@
-package org.example;
-
-import custom.exceptions.newError;
-import drawing_functions.ProgramFrame;
+package PDA;
 
 import java.util.EmptyStackException;
 import java.util.Objects;
@@ -23,16 +20,22 @@ public class Main {
         mainProgram = new ProgramFrame();
         checkPDA(string.toCharArray());
     }
+    static SendToFileManager buffer;
 
-    static void checkPDA(@org.jetbrains.annotations.NotNull char []string) throws newError{
+    static void checkPDA(char []string) throws newError{
         int index = 0;
         PDA = new Stack<>();
         PDA.push(Z0);
+        System.out.println("Printing stack process: ");
+        buffer = new SendToFileManager("output");
+        buffer.appendTextToFile("String: " + Main.string + "\n");
+        printCurrentStateOfStack(PDA,buffer);
         if(string.length>10*2)
             thisCanStart=false;
         while(index < string.length){
             if(string[index] == '0'){
                 PDA.push(X);
+                printCurrentStateOfStack(PDA,buffer);
                 add++;
             } else if(string[index] == '1'){
                 break;
@@ -48,6 +51,7 @@ public class Main {
                 try{
                     remove++;
                     PDA.pop();
+                    printCurrentStateOfStack(PDA,buffer);
                 } catch(EmptyStackException e){
                     accepted = false;
                     //if it is removing more than it puts
@@ -71,6 +75,23 @@ public class Main {
         else showFinalDialogWindow();
     }
 
+    static Stack<String> copyAuxiliary = new Stack<>();
+    static StringBuilder ID = new StringBuilder();
+    static public void printCurrentStateOfStack(Stack<String> stack,SendToFileManager buffer){
+        ID.delete(0,ID.length());
+        copyAuxiliary.clear();
+        copyAuxiliary.addAll(stack);
+
+        while(!copyAuxiliary.isEmpty()){
+            ID.append('[').append(copyAuxiliary.pop()).append("] ");
+        }
+        if(stack.isEmpty()){
+            ID.append("[]");
+        }
+        System.out.println(ID);
+        buffer.appendTextToFile(ID.toString() + '\n');
+    }
+
     public static void showFinalDialogWindow(){
 
         String aux = "";
@@ -78,12 +99,14 @@ public class Main {
 
         if(accepted && !PDA.empty() && Objects.equals(aux = PDA.pop(), Z0)){
                 message = new StringBuilder("String valid");
-
+                buffer.appendTextToFile("String is valid.");
             } else{
             message = new StringBuilder("String\n" + string + "\nis invalid...\nShowing actual state of the stack: \n[" + aux + "]");
+            buffer.appendTextToFile("String is invalid.");
                 while(!PDA.empty())
                     message.append(" [").append(PDA.pop()).append("]");
             }
+        buffer.closeBinaryFile();
         OptionPane.showFinalDialog(message.toString());
         mainProgram.dispose();
     }

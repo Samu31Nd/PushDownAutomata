@@ -1,6 +1,4 @@
-package drawing_functions;
-
-import org.example.Main;
+package PDA;
 
 import javax.swing.*;
 import java.awt.*;
@@ -66,9 +64,7 @@ public class ProgramPanel extends JPanel implements ActionListener {
                         }
                         try{
                             xMovements[i-1] = -speed;
-                        } catch(IndexOutOfBoundsException e) {
-                            System.out.println("You deleted Z0 bro.");
-                        }
+                        } catch(IndexOutOfBoundsException ignored) { }
                     }
                 }
                 xArr[i] += xMovements[i];
@@ -130,7 +126,6 @@ public class ProgramPanel extends JPanel implements ActionListener {
 
     public void setInOutElements(int in, int out){
         if(out > in){
-            System.out.println("More than i can handle!");
             out = in+1;
         }
         this.in_elements = in+1;

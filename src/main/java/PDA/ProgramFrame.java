@@ -1,19 +1,15 @@
-package drawing_functions;
-
-import com.catppuccin.Flavour;
-import com.catppuccin.Palette;
-import org.example.Personal_utils;
+package PDA;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class ProgramFrame extends JFrame {
 
-    Flavour colours = Palette.MOCHA;
+    Color base = new Color(36, 39, 58);
     ProgramPanel panel;
 
 
     public ProgramFrame(){
-        Personal_utils.createColors();
     }
 
     public void start(int in, int out){
@@ -26,7 +22,7 @@ public class ProgramFrame extends JFrame {
         this.setVisible(true);
         this.setResizable(false);
         this.pack();
-        this.setBackground(colours.getBase());
+        this.setBackground(base);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

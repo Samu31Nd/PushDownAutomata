@@ -1,4 +1,4 @@
-package custom.exceptions;
+package PDA;
 
 public class newError extends Exception {
     public newError(String message) {

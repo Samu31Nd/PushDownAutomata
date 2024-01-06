@@ -1,4 +1,4 @@
-package org.example;
+package PDA;
 
 import javax.swing.*;
 

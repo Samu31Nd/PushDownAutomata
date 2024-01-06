@@ -14,19 +14,4 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-
-    <dependencies>
-        <dependency>
-            <groupId>com.catppuccin</groupId>
-            <artifactId>catppuccin-palette</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>13.0</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
-
 </project>

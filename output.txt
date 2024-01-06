@@ -1,0 +1,5 @@
+Cadena: 01
+[Z0] 
+[X] [Z0] 
+[Z0] 
+String is valid.
